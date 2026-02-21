@@ -53,20 +53,48 @@
  */
 export function writePostcard(sender, receiver, message) {
   // Your code here
+    if(typeof sender !== 'string' || typeof receiver !== 'string' || typeof message !== 'string')
+        return ""
+
+    const trimmedSender = sender.trim()
+    const trimmedReceiver = receiver.trim()
+    const trimmedMessage = message.trim()
+
+    if(trimmedSender.length === 0 || trimmedReceiver.length ===0 || trimmedMessage.length === 0)
+        return ""
+
+    return `Priy ${receiver},\n\n${message}\n\nAapka/Aapki,\n${sender}`
 }
 
 export function isValidPincode(code) {
   // Your code here
+    //if(typeof  code !== 'string') return false
+
+    return typeof code === 'string' && !code.startsWith('0') && code.length === 6 && /^\d{6}$/.test(code)
+
+
 }
 
 export function formatPostcardField(label, value, width) {
   // Your code here
+    if(typeof label !== 'string' || typeof  value !== 'string') return ""
+
+    if(width === undefined || width === null)
+        width = 12
+
+    return label.padEnd(width) + ": " + value
 }
 
 export function isFromState(address, stateCode) {
   // Your code here
+    return typeof address === 'string' && typeof stateCode ==='string' && address.endsWith(stateCode)
 }
 
 export function countVowels(message) {
   // Your code here
+
+    if(typeof  message !== 'string' || message === undefined || message === null) return 0
+
+    const matchedArray = message.match(/[aeiouAEIOU]/g)
+    return matchedArray === null ? 0 : matchedArray.length
 }
